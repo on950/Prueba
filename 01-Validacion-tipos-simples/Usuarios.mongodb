@@ -1,0 +1,37 @@
+// Usar la base de datos
+use("northwind-store")
+
+// Crear la coneccion de usuarios
+db.createCollection("usuarios",{
+	validator:{
+		$jsonSchema:{
+			bsonType:'object',
+			title:'Validacion del objeto de Usuarios',
+			required:['email','contrasena','rol'],
+			properties:{
+				email:{
+					bsonType:'string',
+					description:'Correo electronico del usuario'
+				},
+				contrasena:{
+					bsonType:'string',
+					description:'Contrasena de 8 a 20 caracteres'
+				},
+				rol:{
+					enum:['Admin','Employee','Customer','Guest']
+				},
+				fecha_creacion:{
+					bsonType:'date'
+				},
+				edad:{
+					bsonType:'int',
+					minimum:18,
+					maximum:50
+				},
+				estado:{
+					bsonType:'bool'
+				}
+			}
+		}
+	}
+})

@@ -1,0 +1,42 @@
+// Usar la base de datos
+use("northwind-store")
+
+// Crear la coneccion de usuarios
+db.createCollection("usuarios",{
+	validator:{
+		$jsonSchema:{
+			bsonType:'object',
+			title:'Validacion del objeto de Usuarios',
+			required:['email','contrasena','rol'],
+			properties:{
+				email:{
+					bsonType:'string',
+					description:'Correo electronico del usuario',
+					pattern: "^[A-Za-z\\d.-]{1,}@[A-Za-z\\d.-]{1,}[.][A-Za-z\\d.-]{1,}$"
+				},
+				contrasena:{
+					bsonType:'string',
+					description:'Contrasena de 8 a 20 caracteres',
+					pattern:"^.{8,20}$"
+				},
+				rol:{
+					enum:['Admin','Employee','Customer','Guest']
+				},
+				fecha_creacion:{
+					bsonType:'date'
+				},
+				edad:{
+					bsonType:'int',
+					minimum:18,
+					maximum:50
+				},
+				estado:{
+					bsonType:'bool'
+				}
+			}
+		}
+	}
+})
+
+//Crear un indice para que las busquedas sean mas rapidas y tambien camos a definir que los emails no se dupliquen
+db.usuarios.createIndex({ "email": 1 }, { unique: true });

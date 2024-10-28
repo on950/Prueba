@@ -1,0 +1,5 @@
+// usuar la base de datos
+use("northwind-store")
+
+//borrar base de datos
+db.suppliers.drop()

@@ -1,0 +1,17 @@
+// Usar la base de datos
+use("northwind-store")
+
+//Insertar el documneto en la coleccion suppliers
+db.suppliers.insertOne({
+	SupplierId:1000,
+	CompanyName: 'ITJ-Jiquilpan',
+	ContactName:'pepe',
+	Addres:{
+			Street:'Carretera Nacioonal S/N Km. 202',
+			City:'Jiquilpan',
+			Region:'Centro Occidente',
+			PostalCode:'59510',
+			Country:'Mexico'
+	},
+	Phone:['3531001111']
+})
